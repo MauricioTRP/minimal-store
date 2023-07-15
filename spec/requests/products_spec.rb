@@ -14,20 +14,26 @@ require 'rails_helper'
 
 RSpec.describe "/products", type: :request do
   
-  # This should return the minimal set of attributes required to create a valid
-  # Product. As you add validations to Product, be sure to
-  # adjust the attributes here as well.
+  # minimal params to pass through requests
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      title: "Tetera",
+      description: "Una tetera",
+      price: 10.05
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      title: "",
+      description:"",
+      price: 10.05
+    }
   }
 
   describe "GET /index" do
     it "renders a successful response" do
-      Product.create! valid_attributes
+      create(:product)
       get products_url
       expect(response).to be_successful
     end
@@ -35,7 +41,7 @@ RSpec.describe "/products", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      product = Product.create! valid_attributes
+      product = create(:product)
       get product_url(product)
       expect(response).to be_successful
     end
@@ -50,7 +56,7 @@ RSpec.describe "/products", type: :request do
 
   describe "GET /edit" do
     it "renders a successful response" do
-      product = Product.create! valid_attributes
+      product = create(:product)
       get edit_product_url(product)
       expect(response).to be_successful
     end
@@ -77,30 +83,32 @@ RSpec.describe "/products", type: :request do
         }.to change(Product, :count).by(0)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post products_url, params: { product: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          title: "Ahora es un elefante",
+          description: "Un muy gran elefante",
+          price: 1000
+        }
       }
 
       it "updates the requested product" do
-        product = Product.create! valid_attributes
+        product = create(:product)
         patch product_url(product), params: { product: new_attributes }
         product.reload
-        skip("Add assertions for updated state")
       end
 
       it "redirects to the product" do
-        product = Product.create! valid_attributes
+        product = create(:product)
         patch product_url(product), params: { product: new_attributes }
         product.reload
         expect(response).to redirect_to(product_url(product))
@@ -110,7 +118,7 @@ RSpec.describe "/products", type: :request do
     context "with invalid parameters" do
     
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        product = Product.create! valid_attributes
+        product = create(:product)
         patch product_url(product), params: { product: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -120,14 +128,14 @@ RSpec.describe "/products", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested product" do
-      product = Product.create! valid_attributes
+      product = create(:product)
       expect {
         delete product_url(product)
       }.to change(Product, :count).by(-1)
     end
 
     it "redirects to the products list" do
-      product = Product.create! valid_attributes
+      product = create(:product)
       delete product_url(product)
       expect(response).to redirect_to(products_url)
     end
