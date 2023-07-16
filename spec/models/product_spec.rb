@@ -15,4 +15,11 @@ RSpec.describe Product, type: :model do
 
     expect(product2).to_not be_valid
   end
+
+  it 'doesnt have price below zero' do
+    product3 = build(:product)
+    product3.price = -10
+
+    expect(product3).to_not be_valid
+  end
 end

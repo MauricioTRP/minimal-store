@@ -9,7 +9,7 @@ RSpec.describe "products/index", type: :view do
         price: "9.99"
       ),
       Product.create!(
-        title: "Title",
+        title: "Title2",
         description: "MyText",
         price: "9.99"
       )
@@ -18,9 +18,9 @@ RSpec.describe "products/index", type: :view do
 
   it "renders a list of products" do
     render
-    cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
-    assert_select cell_selector, text: Regexp.new("Title".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("MyText".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("9.99".to_s), count: 2
+
+    assert_select "tr>td", text: Regexp.new("Title".to_s), count: 2
+    assert_select "tr>td", text: Regexp.new("MyText".to_s), count: 2
+    assert_select "tr>td", text: Regexp.new("9.99".to_s), count: 2
   end
 end
