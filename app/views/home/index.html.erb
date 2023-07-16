@@ -11,20 +11,24 @@ Any questions question you can reach me at <%= link_to "my mail", "mailto: mauri
 or check the <%= link_to "repo", "https://github.com/MauricioTRP/minimal-store", "data-bs-toggle" => "tooltip", "data-bs-title" => "GitHub" %>
 
 <div class="row">
-  <% @products.each do |product| %>
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="..." class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title"><%= product.title %></h5>
-            <p class="card-text"><%= sanitize(product.description) %></p>
-            <p class="card-text"><small class="text-body-secondary"> <%= number_to_currency(product.price) %></small></p>
+  <%= cache @products do %>
+    <% @products.each do |product| %>
+      <%= cache product do %>
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="..." class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= product.title %></h5>
+                <p class="card-text"><%= sanitize(product.description) %></p>
+                <p class="card-text"><small class="text-body-secondary"> <%= number_to_currency(product.price) %></small></p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
