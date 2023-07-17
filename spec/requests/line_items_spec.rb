@@ -77,10 +77,7 @@ RSpec.describe "/line_items", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        {
-          product_id: create(:product),
-          cart_id: valid_attributes[:cart]
-        }
+        attributes_for(:line_item)
       }
 
       it "updates the requested line_item" do
@@ -93,11 +90,11 @@ RSpec.describe "/line_items", type: :request do
       end
 
       it "redirects to the cart" do
-        pending "need to implement redirecting in card update"
-        # line_item = LineItem.create! valid_attributes
-        # patch line_item_url(line_item), params: { line_item: new_attributes }
-        # line_item.reload
-        # expect(response).to redirect_to(cart_url(line_item.cart))
+        # pending "need to implement redirecting in card update"
+        line_item = LineItem.create! valid_attributes
+        patch line_item_url(line_item), params: { line_item: new_attributes }
+        line_item.reload
+        expect(response).to redirect_to(cart_url(line_item.cart))
       end
     end
 
