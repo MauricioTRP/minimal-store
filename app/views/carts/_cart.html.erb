@@ -8,4 +8,6 @@
       <li class="list-group-item"> <%= item.quantity %> &times; <%= item.product.title %> </li>
     <% end %>
   </ul>
+
+  <%= button_to "Empty cart", cart, method: :delete %>
 </div>
