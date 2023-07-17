@@ -3,11 +3,30 @@
 
   <p>These are your current products in your cart</p>
 
-  <ul class="list-group list-group-flush">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Item</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+
     <% cart.line_items.each do |item| %>
-      <li class="list-group-item"> <%= item.quantity %> &times; <%= item.product.title %> </li>
+    <tr>
+      <td><%= item.product.title %></td>
+      <td><%= item.quantity %></td>
+      <td><%= number_to_currency(item.total_price) %></td>
+    </tr>
     <% end %>
-  </ul>
+   
+    <tr>
+      <td colspan="2">Total: </td>
+      <td> <%= number_to_currency(cart.total_price) %> </td>
+    </tr>
+  </tbody>
+</table>
 
   <%= button_to "Empty cart", cart, method: :delete %>
 </div>
