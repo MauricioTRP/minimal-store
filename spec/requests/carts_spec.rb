@@ -18,7 +18,7 @@ RSpec.describe "/carts", type: :request do
   # Cart. As you add validations to Cart, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    create(:cart)
+    attributes_for(:cart)
   }
 
   let(:invalid_attributes) {
@@ -120,7 +120,10 @@ RSpec.describe "/carts", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested cart" do
-      cart = Cart.create! valid_attributes
+      product = create(:product)
+      post line_items_url, params: { product_id: product.id }
+      cart = Cart.find(session[:cart_id])
+
       expect {
         delete cart_url(cart)
       }.to change(Cart, :count).by(-1)
