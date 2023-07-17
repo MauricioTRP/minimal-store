@@ -1,2 +1,11 @@
 <div id="<%= dom_id cart %>">
+  <h2>Cart Items</h2>
+
+  <p>These are your current products in your cart</p>
+
+  <ul class="list-group list-group-flush">
+    <% cart.line_items.each do |item| %>
+      <li class="list-group-item"> <%= item.product.title %> </li>
+    <% end %>
+  </ul>
 </div>

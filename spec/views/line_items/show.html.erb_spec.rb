@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "line_items/show", type: :view do
   before(:each) do
-    assign(:line_item, LineItem.create!(
-      product: nil,
-      cart: nil
-    ))
+    assign(:line_item, create(:line_item))
   end
 
   it "renders attributes in <p>" do

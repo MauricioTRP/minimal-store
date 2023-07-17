@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "line_items/edit", type: :view do
   let(:line_item) {
-    LineItem.create!(
-      product: nil,
-      cart: nil
-    )
+    create(:line_item)
   }
 
   before(:each) do

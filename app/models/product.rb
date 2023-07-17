@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   validates :title, :price, presence: true
   validates :price, numericality: { greater_than: 0 }
   validates :title, uniqueness: true
+  validates_associated :line_items
 
   # ============== Relations ======================
   has_many :line_items

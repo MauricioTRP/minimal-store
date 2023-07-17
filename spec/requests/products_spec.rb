@@ -17,11 +17,7 @@ RSpec.describe '/products', type: :request do
   # =============== Context describing ==============
 
   let(:valid_attributes) {
-    {
-      title: 'Tetera',
-      description: 'Una tetera',
-      price: 10.05
-    }
+    attributes_for(:product)
   }
 
   let(:invalid_attributes) {
