@@ -18,7 +18,7 @@ RSpec.describe "/carts", type: :request do
   # Cart. As you add validations to Cart, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    create(:cart)
   }
 
   let(:invalid_attributes) {
