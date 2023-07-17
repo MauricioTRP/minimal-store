@@ -12,72 +12,76 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/products", type: :request do
-  
-  # minimal params to pass through requests
+RSpec.describe '/products', type: :request do
+
+  # =============== Context describing ==============
+
   let(:valid_attributes) {
     {
-      title: "Tetera",
-      description: "Una tetera",
+      title: 'Tetera',
+      description: 'Una tetera',
       price: 10.05
     }
   }
 
   let(:invalid_attributes) {
     {
-      title: "",
-      description:"",
+      title: '',
+      description:'',
       price: 10.05
     }
   }
 
-  describe "GET /index" do
-    it "renders a successful response" do
+
+  # ============ Tests ============================
+
+  describe 'GET /index' do
+    it 'renders a successful response' do
       create(:product)
       get products_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
+  describe 'GET /show' do
+    it 'renders a successful response' do
       product = create(:product)
       get product_url(product)
       expect(response).to be_successful
     end
   end
 
-  describe "GET /new" do
-    it "renders a successful response" do
+  describe 'GET /new' do
+    it 'renders a successful response' do
       get new_product_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /edit" do
-    it "renders a successful response" do
+  describe 'GET /edit' do
+    it 'renders a successful response' do
       product = create(:product)
       get edit_product_url(product)
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Product" do
+  describe 'POST /create' do
+    context 'with valid parameters' do
+      it 'creates a new Product' do
         expect {
           post products_url, params: { product: valid_attributes }
         }.to change(Product, :count).by(1)
       end
 
-      it "redirects to the created product" do
+      it 'redirects to the created product' do
         post products_url, params: { product: valid_attributes }
         expect(response).to redirect_to(product_url(Product.last))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Product" do
+    context 'with invalid parameters' do
+      it 'does not create a new Product' do
         expect {
           post products_url, params: { product: invalid_attributes }
         }.to change(Product, :count).by(0)
@@ -91,23 +95,23 @@ RSpec.describe "/products", type: :request do
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
+  describe 'PATCH /update' do
+    context 'with valid parameters' do
       let(:new_attributes) {
         {
-          title: "Ahora es un elefante",
-          description: "Un muy gran elefante",
+          title: 'Ahora es un elefante',
+          description: 'Un muy gran elefante',
           price: 1000
         }
       }
 
-      it "updates the requested product" do
+      it 'updates the requested product' do
         product = create(:product)
         patch product_url(product), params: { product: new_attributes }
         product.reload
       end
 
-      it "redirects to the product" do
+      it 'redirects to the product' do
         product = create(:product)
         patch product_url(product), params: { product: new_attributes }
         product.reload
@@ -115,29 +119,40 @@ RSpec.describe "/products", type: :request do
       end
     end
 
-    context "with invalid parameters" do
-    
+    context 'with invalid parameters' do
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         product = create(:product)
         patch product_url(product), params: { product: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested product" do
-      product = create(:product)
-      expect {
-        delete product_url(product)
-      }.to change(Product, :count).by(-1)
+  describe 'DELETE /destroy' do
+    context 'is a referenced product' do
+      it 'cant destroy a product' do
+        line_item = LineItem.create(product: create(:product), cart: Cart.create!)
+        expect {
+          delete product_url(line_item.product)
+        }.to change(Product, :count).by(0)
+      end
     end
 
-    it "redirects to the products list" do
-      product = create(:product)
-      delete product_url(product)
-      expect(response).to redirect_to(products_url)
+    context 'is a non referenced product' do
+      it 'destroys a non referenced product' do
+        product = create(:product)
+        expect {
+          delete product_url(product)
+        }.to change(Product, :count).by(-1)
+      end
+  
+      it 'redirects to the products list' do
+        product = create(:product)
+        delete product_url(product)
+        expect(response).to redirect_to(products_url)
+      end  
     end
   end
 end
