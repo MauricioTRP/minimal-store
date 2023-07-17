@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  
   after_action :increment_counter, only: [:index]
   def index
     @products = Product.order(:title)
