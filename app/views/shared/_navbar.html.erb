@@ -24,7 +24,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <%= link_to "Cart", cart_path(session[:cart_id]), class: 'nav-link' if session[:cart_id] %>
         </li>
       </ul>
       <form class="d-flex" role="search">
