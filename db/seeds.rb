@@ -8,6 +8,7 @@
 
 Product.delete_all
 
+puts "Create products"
 20.times do
   Product.create(
     title: Faker::Commerce.product_name,
@@ -15,3 +16,15 @@ Product.delete_all
     price: 9.99
   )
 end
+
+puts "Create Admin"
+
+User.create(
+  email: 'admin@example.com',
+  rut: '12345678-5',
+  name: 'admin',
+  last_name: 'example',
+  phone: '954625741',
+  password: 123456,
+  password_confirmation: 123456
+)
