@@ -13,7 +13,16 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/carts", type: :request do
-  
+  # set session for current test suite
+  def set_session(vars = {})
+    post test_session_path, params: { session_vars: vars }
+    expect(response).to have_http_status(:created)
+
+    vars.each_key do |var|
+      expect(session[var]).to be_present
+    end
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Cart. As you add validations to Cart, be sure to
   # adjust the attributes here as well.
@@ -34,10 +43,19 @@ RSpec.describe "/carts", type: :request do
   end
 
   describe "GET /show" do
-    it "renders a successful response" do
-      cart = Cart.create! valid_attributes
+    it "renders a successful response of current session cart" do
+      cart = create(:cart)
+      set_session(cart_id: cart.id)
+      # TODO find a way to use sessions on tests
       get cart_url(cart)
       expect(response).to be_successful
+    end
+
+    it "doesn't render a cart without a session" do
+      cart = create(:cart)
+
+      get cart_url(cart)
+      expect(response).to_not be_successful
     end
   end
 
