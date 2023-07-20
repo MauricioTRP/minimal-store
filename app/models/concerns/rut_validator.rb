@@ -5,7 +5,7 @@ class RutValidator < ActiveModel::Validator
   def validate(record)
     rut, control = record.rut.split(/-/)
     unless control_digit(rut).downcase == control.downcase
-      record.errors.add :rut, "the controll number should be #{control_digit(record)}"
+      record.errors.add :rut, "is not a valid rut"
     end
   end
 
