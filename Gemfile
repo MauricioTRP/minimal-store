@@ -61,6 +61,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.0'
   # Fixtures for testing tool
   gem 'factory_bot_rails', '~> 6.2'
+  # Tests Coverage
+  gem 'simplecov', require: false
 end
 
 group :development do

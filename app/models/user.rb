@@ -15,6 +15,7 @@ class User < ApplicationRecord
   phone_rgx =  /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/
   name_message = "Only Letters and symbols , . ' - "
   phone_message = 'Invalid phone number'
+  validates :rut, unique: true
   validates :name, presence: true, format: { with: name_rgx, message: name_message }
   validates :last_name, presence: true, format: { with: name_rgx, message: name_message }
   validates :phone, presence: true, format: { with: phone_rgx, message: phone_message }

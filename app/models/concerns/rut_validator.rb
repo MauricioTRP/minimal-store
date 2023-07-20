@@ -4,15 +4,16 @@
 class RutValidator < ActiveModel::Validator
   def validate(record)
     rut, control = record.rut.split(/-/)
-    unless control_digit(rut) == control
+    unless control_digit(record).downcase == control.downcase
       record.errors.add :rut, 'Please enter a valid rut'
     end
   end
 
-  private
+  # private
 
-  def control_digit(rut)
-    sum = rut.reverse.split('').each_with_index.map{ |d,i| d.to_i * ( i%6 + 2)}.sum
+  def control_digit(record)
+    sum = record.rut.gsub(/\D/, '').reverse.split('').each_with_index
+             .map { |d, i| d.to_i * (i % 6 + 2) }.sum
     controll_digit = 11 - sum % 11
     case controll_digit
     when 10
