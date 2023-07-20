@@ -15,7 +15,7 @@ class User < ApplicationRecord
   phone_rgx =  /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/
   name_message = "Only Letters and symbols , . ' - "
   phone_message = 'Invalid phone number'
-  # [TODO] format rut before record creation
+  # TODO format rut before record creation. should remove punctuation signs besides hyphen -
   validates :rut, uniqueness: { case_sensitive: false }
   validates :name, presence: true, format: { with: name_rgx, message: name_message }
   validates :last_name, presence: true, format: { with: name_rgx, message: name_message }
