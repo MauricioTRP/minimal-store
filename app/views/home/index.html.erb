@@ -12,6 +12,8 @@ on the tests side of the app. And a bit of Bootstrap to enhace the front end exp
 Any questions question you can reach me at <%= link_to "my mail", "mailto: mauriciofb@gmail.com" %>
 or check the <%= link_to "repo", "https://github.com/MauricioTRP/minimal-store", "data-bs-toggle" => "tooltip", "data-bs-title" => "GitHub" %>
 
+<p>You can access to the products administration <%= link_to "products", products_path %> after you login  </p>
+
 <div class="row">
   <%= cache @products do %>
     <% @products.each do |product| %>
