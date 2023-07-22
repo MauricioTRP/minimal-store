@@ -7,6 +7,9 @@ class Product < ApplicationRecord
 
   # ============== Relations ======================
   has_many :line_items
+  has_many_attached :images do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100,100]
+  end
 
   # ============== Hooks ==========================
   before_destroy :check_references_by_line_item
