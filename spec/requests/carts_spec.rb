@@ -34,10 +34,19 @@ RSpec.describe "/carts", type: :request do
   end
 
   describe "GET /show" do
-    it "renders a successful response" do
-      cart = Cart.create! valid_attributes
+    it "renders a successful response with valid session" do
+      product = create(:product)
+      post line_items_url, params: { product_id: product.id }
+      cart = Cart.find(session[:cart_id])
+
       get cart_url(cart)
       expect(response).to be_successful
+    end
+
+    it "redirect to root_path with invalid session" do
+      cart = create(:cart)
+      get cart_url(cart)
+      expect(response).to_not be_successful
     end
   end
 
