@@ -7,6 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'devise'
 require_relative 'support/controller_macros'
+require_relative 'support/devise_request_spec_helper'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
@@ -34,4 +35,6 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  config.include DeviseRequestSpecHelpers, type: :request
 end
