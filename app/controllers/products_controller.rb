@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_product
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   # GET /products or /products.json
   def index
@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :price)
+      params.require(:product).permit(:title, :description, :price, images: [])
     end
 
     def invalid_product
