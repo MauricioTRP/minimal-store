@@ -1,39 +1,41 @@
-<h1>Minimal Store</h1>
+<div class="d-inline-flex flex-column flax-shrink-0 p-3", style="width: 75%;">
+  <h1>Minimal Store</h1>
 
-<h3> You've visited this site: <%= pluralize(@counter, 'time') %> </h3>
+  <h3> You've visited this site: <%= pluralize(@counter, 'time') %> </h3>
 
-<p class="muted">This sites uses some elemental validations and tests for models and controllers used
-on the <a href="#" data-bs-toggle="tooltip" data-bs-title="Minimal Store">application</a> 
-here you can find the usage of <%= link_to "Rspec-rails", "https://github.com/rspec/rspec-rails", "data-bs-toggle" => "tooltip", "data-bs-title" => "Testing framework for rails" %> 
-together with <%= link_to "FactoryBot", "https://github.com/thoughtbot/factory_bot", "data-bs-toggle" => "tooltip", "data-bs-title" => "Fixture replacement" %>
-and <%= link_to "Database Cleaner", "https://github.com/DatabaseCleaner/database_cleaner", "data-bs-toggle" => "tooltip", "data-bs-title" => "Clean strategy for testing" %>
-on the tests side of the app. And a bit of Bootstrap to enhace the front end experience.
+  <p class="muted">This sites uses some elemental validations and tests for models and controllers used
+  on the <a href="#" data-bs-toggle="tooltip" data-bs-title="Minimal Store">application</a> 
+  here you can find the usage of <%= link_to "Rspec-rails", "https://github.com/rspec/rspec-rails", "data-bs-toggle" => "tooltip", "data-bs-title" => "Testing framework for rails" %> 
+  together with <%= link_to "FactoryBot", "https://github.com/thoughtbot/factory_bot", "data-bs-toggle" => "tooltip", "data-bs-title" => "Fixture replacement" %>
+  and <%= link_to "Database Cleaner", "https://github.com/DatabaseCleaner/database_cleaner", "data-bs-toggle" => "tooltip", "data-bs-title" => "Clean strategy for testing" %>
+  on the tests side of the app. And a bit of Bootstrap to enhace the front end experience.
 
-Any questions question you can reach me at <%= link_to "my mail", "mailto: mauriciofb@gmail.com" %>
-or check the <%= link_to "repo", "https://github.com/MauricioTRP/minimal-store", "data-bs-toggle" => "tooltip", "data-bs-title" => "GitHub" %>
+  Any questions question you can reach me at <%= link_to "my mail", "mailto: mauriciofb@gmail.com" %>
+  or check the <%= link_to "repo", "https://github.com/MauricioTRP/minimal-store", "data-bs-toggle" => "tooltip", "data-bs-title" => "GitHub" %>
 
-<p>You can access to the products administration <%= link_to "products", products_path %> after you login  </p>
+  <p>You can access to the products administration <%= link_to "products", products_path %> after you login  </p>
 
-<div class="row">
-  <%= cache @products do %>
-    <% @products.each do |product| %>
-      <%= cache product do %>
-        <div class="card mb-3" style="max-width: 540px;">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <img src="..." class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= product.title %></h5>
-                <p class="card-text"><%= sanitize(product.description) %></p>
-                <p class="card-text"><small class="text-body-secondary"> <%= number_to_currency(product.price) %></small></p>
-                <%= button_to "Add To Cart", line_items_path(product_id: product), class: 'btn btn-primary' %>
+  <div class="row">
+    <%= cache @products do %>
+      <% @products.each do |product| %>
+        <%= cache product do %>
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="..." class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title"><%= product.title %></h5>
+                  <p class="card-text"><%= sanitize(product.description) %></p>
+                  <p class="card-text"><small class="text-body-secondary"> <%= number_to_currency(product.price) %></small></p>
+                  <%= button_to "Add To Cart", line_items_path(product_id: product), class: 'btn btn-primary' %>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
