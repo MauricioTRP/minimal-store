@@ -14,9 +14,7 @@
     <%= render "shared/navbar" %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <div id="cart" class="d-inline-flex flex-column flax-shrink-0 p-3", style="width: 15%;">
-      <%= render "carts/cart",  cart: @cart if (@cart and not @cart.line_items.empty?)%>
-    </div>
+    <%= render partial: 'layouts/cart', locals: { cart: @cart } %>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,7 @@
+<% if cart and not cart.line_items.empty? %>
+  <div id="cart" class="d-inline-flex" style="width: 15%">
+    <%= render "carts/cart",  cart: @cart %>
+  </div>
+<% else %>
+  <div id="cart"></div>
+<% end %>
