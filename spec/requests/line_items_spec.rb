@@ -69,7 +69,7 @@ RSpec.describe "/line_items", type: :request do
 
       it "redirects to the created line_item" do
         post line_items_url, params: { line_item: valid_attributes, product_id: valid_attributes[:product].id }
-        expect(response).to redirect_to(cart_url(LineItem.last.cart))
+        expect(response).to redirect_to(root_path)
       end
     end
   end
