@@ -1,8 +1,15 @@
 class HomeController < ApplicationController
-  
+  include CurrentCart
+  before_action :set_cart
+
   after_action :increment_counter, only: [:index]
   def index
     @products = Product.order(:title)
+    if @cart.id == session[:cart_id]
+      @cart
+    else
+      invalid_cart
+    end
   end
 
   protected
