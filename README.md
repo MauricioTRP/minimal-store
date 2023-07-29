@@ -2,7 +2,7 @@
 
 This project is a minimal store made with `ruby` and `rails`  to admin products and show to potential buyers.
 It's implementation follows the steps of the book [Agile Web Development with Rails 7](https://pragprog.com/titles/rails7/agile-web-development-with-rails-7/) in terms of model and database modeling.
-It have the minimal validations to model and requests, also uses `rspec-rails` as testing framework together with `factory-bot` as a fixture replacement and database-cleaner as cleaner strategy to test db.
+It have the minimal validations to model and requests, also uses `rspec-rails` as testing framework together with `factory-bot` as a fixture replacement and `database-cleaner` as cleaner strategy to test db.
 
 ## Dependencies
 For you to use this project you need:
