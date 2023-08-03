@@ -22,6 +22,15 @@
   </div>
 
   <div>
+    <% product.images.each do |image| %>
+      <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+    <% end %>
+
+    <%= form.file_field :images, multiple: true %>
+  </div>
+
+
+  <div>
     <%= form.label :price, class: 'form-label' %>
     <%= form.text_field :price, class: 'form-control' %>
   </div>
