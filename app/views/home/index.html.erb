@@ -16,27 +16,14 @@
 
   <p>You can access to the products administration <%= link_to "products", products_path, "data-bs-toggle" => "tooltip", "data-bs-title" => "Admin Dashboard" %> after you login  </p>
 
-  <div class="row">
-    <%= cache @products do %>
-      <% @products.each do |product| %>
-        <%= cache product do %>
-          <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <%= image_tag rails_blob_path(product.images.first, disposition: "attachment"), class:"img-fluid rounded-start", alt:"no image...." if product.images.first %>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title"><%= product.title %></h5>
-                  <p class="card-text"><%= sanitize(product.description) %></p>
-                  <p class="card-text"><small class="text-body-secondary"> <%= number_to_currency(product.price) %></small></p>
-                  <%= button_to "Add To Cart", line_items_path(product_id: product), class: 'btn btn-primary' %>
-                </div>
-              </div>
-            </div>
-          </div>
+  <%= turbo_stream_from 'products' %>
+    <div class="row">
+      <%= cache @products do %>
+        <% @products.each do |product| %>
+          <%= cache product do %>
+            <%= render partial: 'home/product', object: product %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
 </div>

@@ -1,0 +1,13 @@
+@keyframes highlight {
+    0% {
+        --bs-table-bg: green;
+    }
+
+    100% {
+        --bs-table-bg: var(--bs-body-bg);
+    }
+}
+
+.line-item-highlight {
+    animation: highlight 2s ease 2 !important;
+}

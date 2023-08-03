@@ -1,0 +1,17 @@
+<%= turbo_frame_tag(dom_id(product)) do %>
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <%= image_tag rails_blob_path(product.images.first, disposition: "attachment"), class:"img-fluid rounded-start", alt:"no image...." if product.images.first %>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+            <h5 class="card-title"><%= product.title %></h5>
+            <p class="card-text"><%= sanitize(product.description) %></p>
+            <p class="card-text"><small class="text-body-secondary"> <%= number_to_currency(product.price) %></small></p>
+            <%= button_to "Add To Cart", line_items_path(product_id: product), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
