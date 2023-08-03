@@ -21,6 +21,8 @@
     </tr>
   </tbody>
 </table>
-
-  <%= button_to "Empty cart", cart, method: :delete %>
+  <div class="row">
+    <div class="col-6"><%= button_to "Empty cart", cart, method: :delete, class: 'btn btn-success' %></div>
+    <div class="col-6"><%= button_to "Checkout", new_order_path, method: :get, class: 'btn btn-secondary' %></div>
+  </div>
 </div>
