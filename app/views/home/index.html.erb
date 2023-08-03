@@ -11,10 +11,10 @@
   and <%= link_to "Database Cleaner", "https://github.com/DatabaseCleaner/database_cleaner", "data-bs-toggle" => "tooltip", "data-bs-title" => "Clean strategy for testing" %>
   on the tests side of the app. And a bit of Bootstrap to enhace the front end experience.
 
-  Any questions question you can reach me at <%= link_to "my mail", "mailto: mauriciofb@gmail.com" %>
+  Any questions question you can reach me at <%= link_to "my mail", "mailto: mauriciofb@gmail.com", "data-bs-toggle" => "tooltip", "data-bs-title" => "mauriciofb@gmail.com" %>
   or check the <%= link_to "repo", "https://github.com/MauricioTRP/minimal-store", "data-bs-toggle" => "tooltip", "data-bs-title" => "GitHub" %>
 
-  <p>You can access to the products administration <%= link_to "products", products_path %> after you login  </p>
+  <p>You can access to the products administration <%= link_to "products", products_path, "data-bs-toggle" => "tooltip", "data-bs-title" => "Admin Dashboard" %> after you login  </p>
 
   <div class="row">
     <%= cache @products do %>
@@ -23,7 +23,7 @@
           <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
               <div class="col-md-4">
-                <img src="..." class="img-fluid rounded-start" alt="...">
+                <%= image_tag rails_blob_path(product.images.first, disposition: "attachment"), class:"img-fluid rounded-start", alt:"no image...." if product.images.first %>
               </div>
               <div class="col-md-8">
                 <div class="card-body">

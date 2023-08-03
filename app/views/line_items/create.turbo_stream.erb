@@ -1,4 +1,5 @@
 <%= turbo_stream.replace 'notice' do %>
+  <% flash.now[:notice] = 'new line_item' %>
   <%= render 'home/notice', locals: {notice: @notice } %>
 <% end %>
 
